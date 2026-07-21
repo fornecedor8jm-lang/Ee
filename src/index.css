@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-gothic: "Cinzel", serif;
+
+  --color-mystic-black: #000000;
+  --color-mystic-dark: #0d0c12;
+  --color-mystic-purple: #4b0082;
+  --color-mystic-purple-light: #6a0dad;
+  --color-mystic-accent: #8e44ad;
+  --color-mystic-accent-light: #9b59b6;
+  --color-mystic-gold: #d4af37;
+  --color-mystic-gold-light: #f1c40f;
+  --color-mystic-gray: #cccccc;
+}
+
+/* Custom glow animations */
+@keyframes pulse-gold {
+  0%, 100% {
+    text-shadow: 0 0 4px rgba(212, 175, 55, 0.2), 0 0 10px rgba(212, 175, 55, 0.4);
+  }
+  50% {
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.4), 0 0 20px rgba(212, 175, 55, 0.8);
+  }
+}
+
+@keyframes pulse-purple {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px rgba(106, 13, 173, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(106, 13, 173, 0.8));
+  }
+}
+
+.animate-gold-glow {
+  animation: pulse-gold 3s infinite ease-in-out;
+}
+
+.animate-purple-glow {
+  animation: pulse-purple 4s infinite ease-in-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4b0082;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8e44ad;
+}
+
+/* Custom border styling with gold accents */
+.mystic-border {
+  position: relative;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.mystic-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 1px solid rgba(106, 13, 173, 0.3);
+  pointer-events: none;
+  border-radius: inherit;
+}

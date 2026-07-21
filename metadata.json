@@ -1,0 +1,6 @@
+{
+  "name": "Lia D' Farrapo",
+  "description": "Oráculo & Magia - Consultas espirituais, tiragens de tarô, magias individuais e coletivos de glamour.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
