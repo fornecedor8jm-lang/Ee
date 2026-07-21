@@ -29,11 +29,11 @@ export default function ServiceSection({ onSelectService }: ServiceSectionProps)
 
   const getWhatsAppLink = (serviceName: string) => {
     const text = `Olá! Gostaria de saber mais sobre os serviços de Oráculo & Magia. Meu interesse é: ${serviceName}. Poderia me passar mais informações?`;
-    return `https://contate.me/5561991345182?text=${encodeURIComponent(text)}`;
+    return `https://api.whatsapp.com/send?phone=556191345182&text=${encodeURIComponent(text)}`;
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 py-16" id="servicos">
+    <div className="w-full max-w-7xl mx-auto px-4 py-16 scroll-mt-24 md:scroll-mt-28" id="servicos">
       <div className="text-center mb-12">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/40 border border-purple-500/20 text-[#d4af37] text-xs font-mono uppercase mb-4 tracking-wider">
           <Sparkles className="w-3.5 h-3.5 animate-pulse" />

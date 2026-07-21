@@ -33,6 +33,18 @@ export default function App() {
   const [specificDetails, setSpecificDetails] = useState('');
   const [photoSentConfirm, setPhotoSentConfirm] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [isInputFocused, setIsInputFocused] = useState(false);
+
+  const formatDateInput = (value: string): string => {
+    const digits = value.replace(/\D/g, '').slice(0, 8);
+    if (digits.length <= 2) {
+      return digits;
+    } else if (digits.length <= 4) {
+      return `${digits.slice(0, 2)}/${digits.slice(2)}`;
+    } else {
+      return `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4)}`;
+    }
+  };
 
   const handleSelectService = (serviceName: string) => {
     setContactCategory(serviceName);
@@ -90,11 +102,19 @@ export default function App() {
     msg += `\n---\n`;
     msg += `⚠️ *Aviso Legal (CDC):* O envio desta mensagem automática representa apenas uma solicitação inicial de contato e análise profissional. O agendamento, prazo e contratação do serviço serão combinados e validados pelo profissional no canal de atendimento do WhatsApp antes de qualquer pagamento.`;
 
-    const whatsappUrl = `https://contate.me/5561991345182?text=${encodeURIComponent(msg)}`;
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=556191345182&text=${encodeURIComponent(msg)}`;
+    
+    // Abrir em uma nova aba com segurança a partir de dentro do iframe
+    const link = document.createElement('a');
+    link.href = whatsappUrl;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
-  const mainWhatsAppUrl = "https://contate.me/5561991345182?text=Ol%C3%A1%20Lia!%20Acessei%20o%20site%20e%20gostaria%20de%20tirar%20d%C3%BAvidas%20gerais%20sobre%20os%20seus%20servi%C3%A7os%20de%20Or%C3%A1culo%20e%20Magias.%20Como%20funciona%20o%20agendamento%3F";
+  const mainWhatsAppUrl = "https://api.whatsapp.com/send?phone=556191345182&text=Ol%C3%A1%20Lia!%20Acessei%20o%20site%20e%20gostaria%20de%20tirar%20d%C3%BAvidas%20gerais%20sobre%20os%20seus%20servi%C3%A7os%20de%20Or%C3%A1culo%20e%20Magias.%20Como%20funciona%20o%20agendamento%3F";
 
   return (
     <div className="relative min-h-screen text-white font-sans selection:bg-purple-900 selection:text-[#d4af37]">
@@ -140,7 +160,7 @@ export default function App() {
             </div>
 
             {/* Candle Left */}
-            <div className="absolute -left-12 bottom-0 flex flex-col items-center">
+            <div className="absolute -left-12 bottom-0 hidden sm:flex flex-col items-center">
               <motion.div
                 animate={{ scale: [1, 1.15, 1], y: [0, -1, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
@@ -150,7 +170,7 @@ export default function App() {
             </div>
 
             {/* Candle Right */}
-            <div className="absolute -right-12 bottom-0 flex flex-col items-center">
+            <div className="absolute -right-12 bottom-0 hidden sm:flex flex-col items-center">
               <motion.div
                 animate={{ scale: [1.1, 0.95, 1.1], y: [0, -1.5, 0] }}
                 transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
@@ -269,8 +289,8 @@ export default function App() {
       </section>
 
       {/* 6. DIRECT CONVERSATION FORM/LINK AGENT */}
-      <section id="contato" className="w-full max-w-4xl mx-auto px-4 py-16 text-center">
-        <div className="bg-gradient-to-b from-[#0e071c] to-[#040208] rounded-2xl border border-purple-500/15 p-8 md:p-10 shadow-2xl relative overflow-hidden">
+      <section id="contato" className="w-full max-w-4xl mx-auto px-4 py-12 md:py-16 text-center scroll-mt-24 md:scroll-mt-28">
+        <div className="bg-gradient-to-b from-[#0e071c] to-[#040208] rounded-2xl border border-purple-500/15 p-5 sm:p-8 md:p-10 shadow-2xl relative overflow-hidden">
           {/* Accent decoration */}
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#d4af37]/45 to-transparent" />
           
@@ -281,7 +301,7 @@ export default function App() {
             "Escolha o seu serviço ideal abaixo, preencha a sua intenção principal se desejar, e conecte-se diretamente comigo no WhatsApp para darmos início."
           </p>
 
-          <form onSubmit={handleSendContact} className="max-w-xl mx-auto space-y-6 text-left">
+          <form onSubmit={handleSendContact} className="relative z-10 max-w-xl mx-auto space-y-5 sm:space-y-6 text-left">
             <div>
               <label className="block text-xs uppercase tracking-widest text-[#d4af37] font-semibold mb-2 font-mono">
                 Selecione o Serviço de Interesse
@@ -329,6 +349,8 @@ export default function App() {
                   required
                   value={clientName}
                   onChange={(e) => setClientName(e.target.value)}
+                  onFocus={() => setIsInputFocused(true)}
+                  onBlur={() => setIsInputFocused(false)}
                   placeholder="Nome Completo do Solicitante"
                   className="w-full bg-black/60 text-white px-4 py-3 rounded-lg border border-purple-500/25 focus:border-[#d4af37] focus:outline-none text-sm transition-all"
                 />
@@ -341,9 +363,12 @@ export default function App() {
                   type="text"
                   required
                   value={clientDob}
-                  onChange={(e) => setClientDob(e.target.value)}
+                  onChange={(e) => setClientDob(formatDateInput(e.target.value))}
+                  onFocus={() => setIsInputFocused(true)}
+                  onBlur={() => setIsInputFocused(false)}
                   placeholder="Ex: DD/MM/AAAA"
                   className="w-full bg-black/60 text-white px-4 py-3 rounded-lg border border-purple-500/25 focus:border-[#d4af37] focus:outline-none text-sm transition-all"
+                  maxLength={10}
                 />
               </div>
             </div>
@@ -356,8 +381,9 @@ export default function App() {
               'Corte de Laços'
             ].includes(contactCategory) || contactCategory.toLowerCase().includes('amor') || contactCategory.toLowerCase().includes('adoçamento') || contactCategory.toLowerCase().includes('corte')) && (
               <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
                 className="p-4 rounded-xl bg-purple-950/15 border border-purple-500/10 space-y-4"
               >
                 <div className="text-[11px] font-mono uppercase tracking-widest text-purple-300 font-semibold mb-1 flex items-center gap-1.5">
@@ -372,6 +398,8 @@ export default function App() {
                       type="text"
                       value={partnerName}
                       onChange={(e) => setPartnerName(e.target.value)}
+                      onFocus={() => setIsInputFocused(true)}
+                      onBlur={() => setIsInputFocused(false)}
                       placeholder="Nome Completo (se houver)"
                       className="w-full bg-black/60 text-white px-3.5 py-2.5 rounded-lg border border-purple-500/20 focus:border-[#d4af37] focus:outline-none text-sm transition-all"
                     />
@@ -383,9 +411,12 @@ export default function App() {
                     <input
                       type="text"
                       value={partnerDob}
-                      onChange={(e) => setPartnerDob(e.target.value)}
+                      onChange={(e) => setPartnerDob(formatDateInput(e.target.value))}
+                      onFocus={() => setIsInputFocused(true)}
+                      onBlur={() => setIsInputFocused(false)}
                       placeholder="DD/MM/AAAA (se houver)"
                       className="w-full bg-black/60 text-white px-3.5 py-2.5 rounded-lg border border-purple-500/20 focus:border-[#d4af37] focus:outline-none text-sm transition-all"
+                      maxLength={10}
                     />
                   </div>
                 </div>
@@ -404,6 +435,8 @@ export default function App() {
               <textarea
                 value={specificDetails}
                 onChange={(e) => setSpecificDetails(e.target.value)}
+                onFocus={() => setIsInputFocused(true)}
+                onBlur={() => setIsInputFocused(false)}
                 placeholder={
                   contactCategory === 'Tiragem Objetiva (1 pergunta)' ? 'Ex: Irei conseguir a aprovação no projeto que apresentei nesta semana?' :
                   contactCategory === 'Conselho da Espiritualidade' ? 'Ex: Gostaria de um conselho geral sobre minha espiritualidade e meus mentores.' :
@@ -469,11 +502,13 @@ export default function App() {
         rel="noopener noreferrer"
         whileHover={{ scale: 1.15, rotate: 5 }}
         whileTap={{ scale: 0.9 }}
-        className="fixed bottom-6 right-6 z-50 p-4 rounded-full bg-green-600 text-white shadow-[0_4px_15px_rgba(22,163,74,0.5)] hover:bg-green-500 transition-all flex items-center justify-center cursor-pointer group"
+        className={`fixed bottom-4 right-4 md:bottom-6 md:right-6 z-40 p-2.5 md:p-4 rounded-full bg-green-600 text-white shadow-[0_4px_15px_rgba(22,163,74,0.5)] hover:bg-green-500 flex items-center justify-center cursor-pointer group transition-all duration-300 ${
+          isInputFocused ? 'opacity-0 pointer-events-none scale-75' : 'opacity-100'
+        }`}
         title="Falar com a Lia no WhatsApp"
       >
-        <MessageCircle className="w-6 h-6 fill-current text-white group-hover:scale-110 transition-transform" />
-        <span className="absolute right-14 bg-black/80 backdrop-blur-sm text-xs font-semibold px-3 py-1.5 rounded-lg border border-purple-500/25 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap tracking-wider pointer-events-none">
+        <MessageCircle className="w-5 h-5 md:w-6 md:h-6 fill-current text-white group-hover:scale-110 transition-transform" />
+        <span className="hidden md:block absolute right-14 bg-black/80 backdrop-blur-sm text-xs font-semibold px-3 py-1.5 rounded-lg border border-purple-500/25 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap tracking-wider pointer-events-none">
           Chamar no WhatsApp 🔮
         </span>
       </motion.a>

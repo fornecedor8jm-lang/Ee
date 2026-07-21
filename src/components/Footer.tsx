@@ -47,8 +47,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#oraculo" onClick={(e) => handleScrollTo(e, '#oraculo')} className="hover:text-[#d4af37] transition-colors">
-                  Oráculo Diário
+                <a href="#pagamento" onClick={(e) => handleScrollTo(e, '#pagamento')} className="hover:text-[#d4af37] transition-colors">
+                  Pagamento
                 </a>
               </li>
               <li>

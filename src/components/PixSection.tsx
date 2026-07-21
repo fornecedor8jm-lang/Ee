@@ -15,11 +15,11 @@ export default function PixSection() {
 
   const getWhatsAppReceiptLink = () => {
     const text = `Olá Cecilia! Realizei o Pix para confirmação do meu trabalho espiritual. Gostaria de enviar o comprovante por aqui para darmos início ao meu atendimento!`;
-    return `https://contate.me/5561991345182?text=${encodeURIComponent(text)}`;
+    return `https://api.whatsapp.com/send?phone=556191345182&text=${encodeURIComponent(text)}`;
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 py-16" id="pagamento">
+    <div className="w-full max-w-4xl mx-auto px-4 py-16 scroll-mt-24 md:scroll-mt-28" id="pagamento">
       <div className="text-center mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/40 border border-purple-500/20 text-[#d4af37] text-xs font-mono uppercase mb-4 tracking-wider">
           <QrCode className="w-3.5 h-3.5" />

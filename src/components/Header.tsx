@@ -74,7 +74,7 @@ export default function Header() {
           {/* Desktop Call to Action */}
           <div className="hidden lg:block">
             <a
-              href="https://contate.me/5561991345182?text=Ol%C3%A1%20Lia!%20Gostaria%20de%20agendar%20uma%20consulta%20de%20Or%C3%A1culo%20ou%20Magia.%20Quais%20os%20pr%C3%B3ximos%20passos%20para%20fazer%20o%20agendamento%3F"
+              href="https://api.whatsapp.com/send?phone=556191345182&text=Ol%C3%A1%20Lia!%20Gostaria%20de%20agendar%20uma%20consulta%20de%20Or%C3%A1culo%20ou%20Magia.%20Quais%20os%20pr%C3%B3ximos%20passos%20para%20fazer%20o%20agendamento%3F"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-800 to-purple-950 hover:from-purple-700 hover:to-purple-900 text-white font-sans text-xs uppercase font-bold tracking-widest border border-[#d4af37]/30 hover:border-[#d4af37]/60 shadow-[0_0_15px_rgba(106,13,173,0.3)] transition-all"
@@ -119,7 +119,7 @@ export default function Header() {
             </nav>
 
             <a
-              href="https://contate.me/5561991345182?text=Ol%C3%A1%20Lia!%20Acessei%20o%20site%20pelo%20celular%20e%20gostaria%20de%20tirar%20d%C3%BAvidas%20sobre%20as%20Tiragens%20e%20as%20Magias.%20Como%20posso%20proceder%3F"
+              href="https://api.whatsapp.com/send?phone=556191345182&text=Ol%C3%A1%20Lia!%20Acessei%20o%20site%20pelo%20celular%20e%20gostaria%20de%20tirar%20d%C3%BAvidas%20sobre%20as%20Tiragens%20e%20as%20Magias.%20Como%20posso%20proceder%3F"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-gradient-to-r from-purple-800 to-purple-950 text-[#d4af37] font-sans text-xs uppercase font-bold tracking-widest border border-[#d4af37]/35 shadow-lg mt-auto mb-12"
