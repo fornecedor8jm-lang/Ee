@@ -13,7 +13,9 @@ import {
   Calendar,
   User,
   HeartHandshake,
-  CheckCircle2
+  CheckCircle2,
+  Phone,
+  Mail
 } from 'lucide-react';
 
 import GlowBackground from './components/GlowBackground';
@@ -21,6 +23,7 @@ import Header from './components/Header';
 import ServiceSection from './components/ServiceSection';
 import PixSection from './components/PixSection';
 import TermsSection from './components/TermsSection';
+import TestimonialsSection from './components/TestimonialsSection';
 import Footer from './components/Footer';
 import { SERVICES } from './data';
 
@@ -28,6 +31,8 @@ export default function App() {
   const [contactCategory, setContactCategory] = useState('Tiragem Completa');
   const [clientName, setClientName] = useState('');
   const [clientDob, setClientDob] = useState('');
+  const [clientPhone, setClientPhone] = useState('');
+  const [clientEmail, setClientEmail] = useState('');
   const [partnerName, setPartnerName] = useState('');
   const [partnerDob, setPartnerDob] = useState('');
   const [specificDetails, setSpecificDetails] = useState('');
@@ -43,6 +48,21 @@ export default function App() {
       return `${digits.slice(0, 2)}/${digits.slice(2)}`;
     } else {
       return `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4)}`;
+    }
+  };
+
+  const formatPhoneInput = (value: string): string => {
+    const digits = value.replace(/\D/g, '').slice(0, 11);
+    if (digits.length === 0) {
+      return '';
+    } else if (digits.length <= 2) {
+      return `(${digits}`;
+    } else if (digits.length <= 6) {
+      return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+    } else if (digits.length <= 10) {
+      return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+    } else {
+      return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
     }
   };
 
@@ -65,6 +85,14 @@ export default function App() {
       alert("Por favor, informe sua Data de Nascimento.");
       return;
     }
+    if (!clientPhone.trim() || clientPhone.replace(/\D/g, '').length < 10) {
+      alert("Por favor, informe um WhatsApp/Telefone de contato válido com DDD.");
+      return;
+    }
+    if (clientEmail.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clientEmail.trim())) {
+      alert("Por favor, insira um e-mail com formato válido ou deixe o campo em branco.");
+      return;
+    }
     if (!termsAccepted) {
       alert("Por favor, declare-se ciente de que o envio representa apenas uma solicitação inicial de atendimento.");
       return;
@@ -78,6 +106,10 @@ export default function App() {
     msg += `👤 *DADOS DO SOLICITANTE:*\n`;
     msg += `- *Nome Completo:* ${clientName.trim()}\n`;
     msg += `- *Data de Nascimento:* ${clientDob.trim()}\n`;
+    msg += `- *WhatsApp/Celular:* ${clientPhone.trim()}\n`;
+    if (clientEmail.trim()) {
+      msg += `- *E-mail:* ${clientEmail.trim()}\n`;
+    }
 
     const needsPartner = [
       'Amor e Relacionamentos',
@@ -196,7 +228,7 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="font-gothic font-extrabold text-5xl md:text-8xl tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-purple-400 drop-shadow-[0_5px_15px_rgba(75,0,130,0.6)] mb-4 select-none leading-none"
+            className="font-gothic font-extrabold text-4xl sm:text-6xl md:text-8xl tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-purple-400 drop-shadow-[0_5px_15px_rgba(75,0,130,0.6)] mb-4 select-none leading-none"
           >
             LIA D' FARRAPO
           </motion.h1>
@@ -276,6 +308,11 @@ export default function App() {
       {/* 3. DETAILED SERVICES & PRICING TABLE SECTION */}
       <section className="relative py-8 bg-[#020104]/50">
         <ServiceSection onSelectService={handleSelectService} />
+      </section>
+
+      {/* CLIENT TESTIMONIALS SECTION */}
+      <section className="relative py-8 bg-[#010003]/60">
+        <TestimonialsSection />
       </section>
 
       {/* 4. PIX & TRANSACTION FLOW RULES */}
@@ -369,6 +406,39 @@ export default function App() {
                   placeholder="Ex: DD/MM/AAAA"
                   className="w-full bg-black/60 text-white px-4 py-3 rounded-lg border border-purple-500/25 focus:border-[#d4af37] focus:outline-none text-sm transition-all"
                   maxLength={10}
+                />
+              </div>
+            </div>
+
+            {/* Client Contact Details */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-widest text-[#d4af37] font-semibold mb-2 font-mono flex items-center gap-1.5">
+                  <Phone className="w-3.5 h-3.5" /> WhatsApp / Telefone
+                </label>
+                <input
+                  type="tel"
+                  required
+                  value={clientPhone}
+                  onChange={(e) => setClientPhone(formatPhoneInput(e.target.value))}
+                  onFocus={() => setIsInputFocused(true)}
+                  onBlur={() => setIsInputFocused(false)}
+                  placeholder="Ex: (XX) XXXXX-XXXX"
+                  className="w-full bg-black/60 text-white px-4 py-3 rounded-lg border border-purple-500/25 focus:border-[#d4af37] focus:outline-none text-sm transition-all"
+                />
+              </div>
+              <div>
+                <label className="block text-xs uppercase tracking-widest text-[#d4af37] font-semibold mb-2 font-mono flex items-center gap-1.5">
+                  <Mail className="w-3.5 h-3.5" /> E-mail (Opcional)
+                </label>
+                <input
+                  type="email"
+                  value={clientEmail}
+                  onChange={(e) => setClientEmail(e.target.value)}
+                  onFocus={() => setIsInputFocused(true)}
+                  onBlur={() => setIsInputFocused(false)}
+                  placeholder="Seu E-mail de Contato"
+                  className="w-full bg-black/60 text-white px-4 py-3 rounded-lg border border-purple-500/25 focus:border-[#d4af37] focus:outline-none text-sm transition-all"
                 />
               </div>
             </div>

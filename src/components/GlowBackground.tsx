@@ -15,7 +15,7 @@ export default function GlowBackground() {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute -top-40 -left-40 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-purple-900/15 blur-[60px] md:blur-[120px] will-change-transform"
+        className="absolute -top-40 -left-40 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-purple-900/15 blur-[40px] md:blur-[60px] will-change-transform"
       />
       <motion.div
         animate={{
@@ -28,7 +28,7 @@ export default function GlowBackground() {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute -bottom-40 -right-40 w-96 h-96 sm:w-[450px] sm:h-[450px] rounded-full bg-indigo-950/20 blur-[70px] md:blur-[130px] will-change-transform"
+        className="absolute -bottom-40 -right-40 w-96 h-96 sm:w-[450px] sm:h-[450px] rounded-full bg-indigo-950/20 blur-[50px] md:blur-[70px] will-change-transform"
       />
       <motion.div
         animate={{
@@ -40,7 +40,7 @@ export default function GlowBackground() {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] rounded-full bg-[#4b0082]/10 blur-[80px] md:blur-[150px] will-change-transform"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] rounded-full bg-[#4b0082]/10 blur-[60px] md:blur-[80px] will-change-transform"
       />
 
       {/* Starry particles */}

@@ -74,9 +74,14 @@ export default function Footer() {
                 <ShieldCheck className="w-4 h-4 text-purple-400" />
                 <span>Titular: Cecilia Mundim</span>
               </p>
-              <p className="font-mono text-[11px] text-gray-400 bg-purple-950/20 p-2 rounded border border-purple-500/10">
-                Pix CPF: 091.561.091-48
-              </p>
+              <a 
+                href="#pagamento" 
+                onClick={(e) => handleScrollTo(e, '#pagamento')}
+                className="block font-mono text-[11px] text-purple-300 hover:text-[#d4af37] bg-purple-950/20 p-2 rounded border border-purple-500/10 hover:border-[#d4af37]/30 transition-all cursor-pointer text-center md:text-left"
+                title="Ir para Área de Pagamento Seguro"
+              >
+                Pix CPF: ***.***.091-** <span className="text-[#d4af37] text-[10px] ml-1">↳ Revelar</span>
+              </a>
               <p className="text-[10px] text-gray-400 italic">
                 *Obrigatório entrar em contato via WhatsApp antes do pagamento.
               </p>

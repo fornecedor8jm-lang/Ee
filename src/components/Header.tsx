@@ -99,33 +99,49 @@ export default function Header() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 top-[60px] z-30 bg-black/95 backdrop-blur-lg lg:hidden flex flex-col p-6 border-b border-purple-500/10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/98 backdrop-blur-xl lg:hidden flex flex-col justify-between p-6 overflow-y-auto"
           >
-            <nav className="flex flex-col gap-5 py-6">
+            {/* Drawer Header with Title and Close Button */}
+            <div className="flex justify-between items-center pb-4 border-b border-purple-500/10">
+              <span className="text-xl font-gothic font-extrabold tracking-widest text-white uppercase">
+                Lia D' Farrapo
+              </span>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-2 text-[#d4af37] hover:text-white transition-colors cursor-pointer"
+                aria-label="Fechar Menu"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Navigation Links */}
+            <nav className="flex flex-col gap-6 my-auto py-8">
               {navItems.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
                   onClick={(e) => handleScrollTo(e, item.href)}
-                  className="font-sans text-sm uppercase font-bold tracking-widest text-gray-300 hover:text-[#d4af37] py-2 border-b border-purple-950/40"
+                  className="font-sans text-lg uppercase font-bold tracking-widest text-center text-gray-200 hover:text-[#d4af37] active:text-[#d4af37] py-3 transition-colors"
                 >
                   {item.name}
                 </a>
               ))}
             </nav>
 
+            {/* WhatsApp Call-to-Action in Mobile Menu */}
             <a
               href="https://api.whatsapp.com/send?phone=556191345182&text=Ol%C3%A1%20Lia!%20Acessei%20o%20site%20pelo%20celular%20e%20gostaria%20de%20tirar%20d%C3%BAvidas%20sobre%20as%20Tiragens%20e%20as%20Magias.%20Como%20posso%20proceder%3F"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-gradient-to-r from-purple-800 to-purple-950 text-[#d4af37] font-sans text-xs uppercase font-bold tracking-widest border border-[#d4af37]/35 shadow-lg mt-auto mb-12"
+              aria-label="Chamar Lia no WhatsApp"
+              className="w-full inline-flex items-center justify-center gap-3 px-5 py-3.5 rounded-lg bg-gradient-to-r from-purple-800 to-purple-950 text-[#d4af37] font-sans text-sm uppercase font-bold tracking-widest border border-[#d4af37]/35 shadow-lg mb-8 transition-transform active:scale-95"
             >
-              <MessageCircle className="w-4 h-4 fill-current" />
-              WhatsApp de Atendimento
+              <MessageCircle className="w-5 h-5 fill-current" />
+              Falar no WhatsApp
             </a>
           </motion.div>
         )}

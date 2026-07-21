@@ -15,7 +15,7 @@ export default function ServiceSection({ onSelectService }: ServiceSectionProps)
   const categories = [
     { id: 'all', name: 'Todos', icon: Sparkles },
     { id: 'tiragens', name: 'Tiragens', icon: Compass },
-    { id: 'metodos', name: 'Métodos Custom', icon: HeartHandshake },
+    { id: 'metodos', name: 'Métodos Especiais', icon: HeartHandshake },
     { id: 'magias', name: 'Magias Individuais', icon: Shield },
     { id: 'coletivos', name: 'Coletivos de Glamour', icon: Eye },
   ];
@@ -33,13 +33,13 @@ export default function ServiceSection({ onSelectService }: ServiceSectionProps)
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 py-16 scroll-mt-24 md:scroll-mt-28" id="servicos">
+    <section className="w-full max-w-7xl mx-auto px-4 py-16 scroll-mt-24 md:scroll-mt-28" id="servicos" aria-labelledby="services-title">
       <div className="text-center mb-12">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/40 border border-purple-500/20 text-[#d4af37] text-xs font-mono uppercase mb-4 tracking-wider">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/40 border border-purple-500/20 text-[#d4af37] text-xs font-sans font-semibold uppercase mb-4 tracking-wider">
           <Sparkles className="w-3.5 h-3.5 animate-pulse" />
           Menu de Trabalhos & Oráculos
         </div>
-        <h2 className="text-3xl md:text-5xl font-gothic font-bold text-white tracking-wide uppercase mb-4">
+        <h2 id="services-title" className="text-3xl md:text-5xl font-gothic font-bold text-white tracking-wide uppercase mb-4">
           Nossos Serviços Espirituais
         </h2>
         <p className="font-serif text-lg text-gray-300 max-w-2xl mx-auto italic">
@@ -144,10 +144,10 @@ export default function ServiceSection({ onSelectService }: ServiceSectionProps)
               {/* Price & CTA */}
               <div className="mt-auto pt-4 border-t border-purple-500/10">
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-xs text-purple-400 font-mono">VALOR DO TRABALHO</span>
+                  <span className="text-xs text-purple-300 font-sans font-semibold uppercase tracking-wider">Valor do Trabalho</span>
                   <div className="text-right">
-                    <span className="text-sm font-semibold text-[#d4af37] font-mono mr-1">R$</span>
-                    <span className="text-2xl font-bold text-white font-mono tracking-tight group-hover:text-[#d4af37] transition-colors">
+                    <span className="text-sm font-bold text-[#d4af37] font-sans mr-1">R$</span>
+                    <span className="text-2xl font-extrabold text-white font-sans tracking-tight group-hover:text-[#d4af37] transition-colors">
                       {service.price}
                     </span>
                   </div>
@@ -180,6 +180,6 @@ export default function ServiceSection({ onSelectService }: ServiceSectionProps)
           </div>
         )}
       </motion.div>
-    </div>
+    </section>
   );
 }
