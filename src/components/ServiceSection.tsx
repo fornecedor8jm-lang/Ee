@@ -86,13 +86,11 @@ export default function ServiceSection({ onSelectService }: ServiceSectionProps)
 
       {/* Services Grid */}
       <motion.div 
-        layout
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
       >
         <AnimatePresence mode="popLayout">
           {filteredServices.map((service, index) => (
             <motion.div
-              layout
               key={service.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -116,7 +114,7 @@ export default function ServiceSection({ onSelectService }: ServiceSectionProps)
                 </div>
 
                 {/* Name */}
-                <h3 className="text-xl font-gothic font-bold text-white mb-2 group-hover:text-[#d4af37] transition-colors leading-snug">
+                <h3 className="text-xl font-gothic font-bold text-white mb-2 group-hover:text-[#d4af37] transition-colors leading-relaxed">
                   {service.name}
                 </h3>
 
@@ -155,7 +153,7 @@ export default function ServiceSection({ onSelectService }: ServiceSectionProps)
 
                 <button
                   onClick={() => onSelectService(service.name)}
-                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-black/40 border border-purple-500/30 text-purple-300 hover:text-white hover:bg-[#4b0082]/35 hover:border-[#d4af37]/40 transition-all font-sans text-xs uppercase font-bold tracking-widest cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-3 rounded-lg bg-black/40 border border-purple-500/30 text-purple-300 hover:text-white hover:bg-[#4b0082]/35 hover:border-[#d4af37]/40 transition-all font-sans text-xs uppercase font-bold tracking-wider cursor-pointer"
                 >
                   <MessageCircle className="w-3.5 h-3.5" />
                   Preencher Formulário

@@ -64,7 +64,7 @@ export default function TestimonialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.5, delay: idx * 0.1 }}
-            className="bg-gradient-to-b from-[#110a22]/70 to-[#06030c]/90 rounded-xl border border-purple-500/10 p-6 flex flex-col justify-between shadow-lg relative overflow-hidden group hover:border-[#d4af37]/30 transition-all duration-300"
+            className="bg-gradient-to-b from-[#180e33] to-[#0e071e] rounded-xl border border-purple-500/20 p-6 flex flex-col justify-between shadow-lg relative overflow-hidden group hover:border-[#d4af37]/40 transition-all duration-300"
           >
             {/* Background quote mark */}
             <Quote className="absolute -top-4 -right-4 w-24 h-24 text-purple-900/10 pointer-events-none group-hover:text-purple-900/20 transition-colors" />
@@ -83,7 +83,7 @@ export default function TestimonialsSection() {
               </div>
 
               {/* Text */}
-              <p className="font-serif text-sm text-gray-200 leading-relaxed italic mb-6">
+              <p className="font-serif text-sm text-gray-100 leading-relaxed italic mb-6">
                 "{testimonial.text}"
               </p>
             </div>

@@ -315,16 +315,6 @@ export default function App() {
         <TestimonialsSection />
       </section>
 
-      {/* 4. PIX & TRANSACTION FLOW RULES */}
-      <section className="relative py-8 bg-[#030107]/70">
-        <PixSection />
-      </section>
-
-      {/* 5. CONSUMER LAWS (CDC COMPLIANCE SECURE RULES ACCORDIONS) */}
-      <section className="relative py-8 bg-[#010003]/80">
-        <TermsSection />
-      </section>
-
       {/* 6. DIRECT CONVERSATION FORM/LINK AGENT */}
       <section id="contato" className="w-full max-w-4xl mx-auto px-4 py-12 md:py-16 text-center scroll-mt-24 md:scroll-mt-28">
         <div className="bg-gradient-to-b from-[#0e071c] to-[#040208] rounded-2xl border border-purple-500/15 p-5 sm:p-8 md:p-10 shadow-2xl relative overflow-hidden">
@@ -560,6 +550,16 @@ export default function App() {
             </button>
           </form>
         </div>
+      </section>
+
+      {/* 4. PIX & TRANSACTION FLOW RULES */}
+      <section className="relative py-8 bg-[#030107]/70">
+        <PixSection />
+      </section>
+
+      {/* 5. CONSUMER LAWS (CDC COMPLIANCE SECURE RULES ACCORDIONS) */}
+      <section className="relative py-8 bg-[#010003]/80">
+        <TermsSection />
       </section>
 
       {/* 7. SECURE FOOTER */}

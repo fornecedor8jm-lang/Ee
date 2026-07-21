@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 
 export default function GlowBackground() {
   return (
-    <div className="fixed inset-0 -z-50 bg-[#020104] overflow-hidden pointer-events-none select-none">
+    <div className="absolute inset-0 -z-50 bg-[#020104] overflow-hidden pointer-events-none select-none">
       {/* Mystical purple glow blobs */}
       <motion.div
         animate={{
